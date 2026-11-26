@@ -1,0 +1,688 @@
+<title>AI 활용 커리어 아카이빙 · 부산대 특강</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column with a sticky step bar; each 실습 is a numbered build block (order is real). */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --ink:#1b2130; --muted:#5b6474; --line:#dde1e8;
+  --accent:#0e6f66; --accent-soft:#e3f2ef; --tip:#9a5b00; --tip-soft:#fbf1df; --warn:#a1372b; --warn-soft:#fbe9e6;
+  --code-bg:#111826; --code-fg:#e6ebf3;
+  --f-display:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151d; --surface:#181e29; --ink:#e7ebf2; --muted:#9aa4b5; --line:#2a3242;
+  --accent:#4cc3b3; --accent-soft:#16302d; --tip:#f0b45a; --tip-soft:#2d2415; --warn:#f08a7c; --warn-soft:#321c1a;
+  --code-bg:#0b0f16; --code-fg:#e6ebf3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151d; --surface:#181e29; --ink:#e7ebf2; --muted:#9aa4b5; --line:#2a3242;
+  --accent:#4cc3b3; --accent-soft:#16302d; --tip:#f0b45a; --tip-soft:#2d2415; --warn:#f08a7c; --warn-soft:#321c1a;
+  --code-bg:#0b0f16; --code-fg:#e6ebf3; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.5rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.eyebrow{font-size:.8rem;letter-spacing:.08em;color:var(--accent);font-weight:700}
+.lead{font-size:1.1rem;color:var(--muted);max-width:62ch}
+
+/* cover: full-bleed opening band so the guide reads like a titled handout */
+.cover{position:relative;overflow:hidden;
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));
+  padding:clamp(56px,11vw,104px) max(16px,env(safe-area-inset-left,0px)) clamp(44px,8vw,80px);
+  background:linear-gradient(135deg,var(--accent-soft) 0%,var(--bg) 58%,var(--tip-soft) 100%);
+  border-bottom:1px solid var(--line)}
+.cover::after{content:"";position:absolute;right:-12%;top:-40%;width:52%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,var(--accent) 0%,transparent 70%);opacity:.09;pointer-events:none}
+.cover-in{position:relative;max-width:760px;margin:0 auto;display:grid;gap:18px}
+.cover h1{font-size:clamp(2.1rem,6.4vw,3.4rem);line-height:1.14;letter-spacing:-.025em}
+.cover .lead{font-size:clamp(1rem,2.4vw,1.15rem)}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.meta span{font-size:.85rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);
+  border-radius:999px;padding:5px 13px;white-space:nowrap}
+.cta{justify-self:start;margin-top:6px;display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--f-display);font-weight:600;font-size:.98rem;text-decoration:none;
+  color:var(--surface);background:var(--accent);border-radius:999px;padding:11px 24px}
+.cta:hover{filter:brightness(1.08)}
+.links{justify-self:start;display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}.links .cta{margin-top:0}
+/* v8 hero: five brand colours (Notion, Claude, ChatGPT, Gemini, 산지니) */
+:root{--c1:#191919;--c2:#c4623f;--c3:#0d8a6b;--c4:#4b5fd8;--c5:#00529b}
+.cover{background:radial-gradient(38% 60% at 6% 12%,rgba(196,98,63,.16),transparent 70%),radial-gradient(36% 55% at 96% 8%,rgba(75,95,216,.18),transparent 70%),radial-gradient(40% 60% at 88% 96%,rgba(13,138,107,.16),transparent 70%),radial-gradient(34% 50% at 18% 100%,rgba(0,82,155,.14),transparent 70%),var(--bg)}
+.cover::after{display:none}
+.cover .eyebrow{display:inline-block;justify-self:start;color:var(--c5);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.cover h1 .hl{background:linear-gradient(90deg,var(--c2),var(--c4) 55%,var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .meta span{border-left-width:4px}
+.cover .meta span:nth-child(1){border-left-color:var(--c2)}.cover .meta span:nth-child(2){border-left-color:var(--c3)}
+.cover .meta span:nth-child(3){border-left-color:var(--c4)}.cover .meta span:nth-child(4){border-left-color:var(--c5)}
+.links .cta{color:#fff;box-shadow:0 4px 14px -6px rgba(0,0,0,.35)}
+.links .b1{background:var(--c1)}.links .b2{background:var(--c2)}.links .b3{background:var(--c3)}.links .b4{background:var(--c4)}.links .b5{background:var(--c5)}
+.links .cta:hover{filter:brightness(1.12);transform:translateY(-1px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .links .b1{background:#3a3a3a}:root:not([data-theme="light"]) .cover .eyebrow{color:#7fb3e6}}
+:root[data-theme="dark"] .links .b1{background:#3a3a3a}:root[data-theme="dark"] .cover .eyebrow{color:#7fb3e6}
+
+/* structure diagram */
+.map{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:8px;margin-top:8px}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.node b{display:block;font-family:var(--f-display);font-size:.98rem}
+.node span{font-size:.85rem;color:var(--muted)}
+.node.key{border-color:var(--accent);background:var(--accent-soft)}
+.arrow{align-self:center;color:var(--muted);font-family:var(--f-mono)}
+@media (max-width:620px){.map{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}}
+
+section{padding-block:40px;border-top:1px solid var(--line);display:grid;gap:18px}
+#goal{border-top:0}
+.sec-head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.time{font-family:var(--f-mono);font-size:.85rem;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:6px}
+.goal{color:var(--muted)}
+.goal strong{color:var(--ink)}
+
+ol.steps{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:s}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+ol.steps>li>.n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:.85rem;
+  border:1.5px solid var(--accent);color:var(--accent)}
+ol.steps>li>div{min-width:0;display:grid;gap:6px}
+ol.steps li.done{opacity:.55}
+ol.steps li.done>.n{background:var(--accent);color:var(--surface)}
+.done-btn{justify-self:start;font:inherit;font-size:.8rem;color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer}
+.done-btn:hover{color:var(--ink)}
+kbd,.ui{font-family:var(--f-body);font-size:.88em;background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:4px;border:1px solid var(--line);white-space:nowrap}
+
+.prompt{background:var(--code-bg);color:var(--code-fg);border-radius:10px;overflow:hidden}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-size:.8rem;color:#9fb0c8;border-bottom:1px solid #263044}
+.prompt pre{margin:0;padding:14px;font-family:var(--f-mono);font-size:.88rem;line-height:1.65;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+.prompt pre[contenteditable]:focus{outline:2px dashed var(--accent);outline-offset:-2px}
+.copy{font:inherit;font-size:.8rem;color:#0b0f16;background:#7fd8cb;border:0;border-radius:6px;padding:4px 10px;cursor:pointer}
+.copy.reset{background:transparent;color:#9fb0c8;border:1px solid #263044;margin-right:6px}
+.prompt-head span:first-child{margin-right:auto}
+
+.note{border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.note.tip{background:var(--tip-soft)} .note.tip b{color:var(--tip)}
+.note.warn{background:var(--warn-soft)} .note.warn b{color:var(--warn)}
+.note.ok{background:var(--accent-soft)} .note.ok b{color:var(--accent)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-display);font-weight:600;color:var(--muted);font-size:.82rem;letter-spacing:.02em}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--f-mono);font-size:.85rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+ul.check{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+ul.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.check input{margin-top:6px;accent-color:var(--accent);width:18px;height:18px;flex:none}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:6px;min-width:0}
+.card ul{margin:0;padding-left:1.1em}
+
+/* page sketch for 실습 3 */
+.sketch{background:var(--surface);border:1px dashed var(--muted);border-radius:10px;padding:14px;display:grid;gap:10px;font-size:.85rem}
+.sk-cover{height:44px;border-radius:6px;background:linear-gradient(90deg,var(--accent-soft),var(--tip-soft));display:grid;place-items:center;color:var(--muted)}
+.sk-row{display:grid;grid-template-columns:35% 1fr;gap:10px}
+.sk-box{border:1px solid var(--line);border-radius:6px;padding:8px;color:var(--muted);min-width:0}
+.sk-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sk-gal div{height:46px;border:1px solid var(--line);border-radius:6px;display:grid;place-items:center;color:var(--muted)}
+footer{padding-block:32px 56px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;display:grid;gap:8px}
+.rights{margin-top:8px;padding-top:12px;border-top:1px solid var(--line);font-size:.82rem;font-family:var(--f-mono);letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+section{scroll-margin-top:16px}
+.exline{color:var(--muted);font-size:.92em;margin-top:6px}
+</style>
+<style>
+.dash{background:var(--surface);border:1px dashed var(--muted);border-radius:10px;padding:14px;display:grid;gap:10px;font-size:.85rem}
+.dash .row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.dash .row.r3{grid-template-columns:2fr 1fr}
+.dash .blk{border:1px solid var(--line);border-radius:6px;padding:8px 10px;color:var(--muted);min-width:0;display:grid;gap:4px}
+.dash .blk b{color:var(--ink);font-family:var(--f-display);font-size:.9rem}
+.dash .blk.hot{border-color:var(--accent);background:var(--accent-soft)}
+.dash .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dash .cols span{border:1px solid var(--line);border-radius:4px;padding:4px;text-align:center;font-size:.78rem}
+@media (max-width:620px){.dash .row,.dash .row.r3{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:.75rem;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+</style>
+
+<header class="cover">
+  <div class="cover-in">
+    <p class="eyebrow">부산대학교 특강 · 2026.11.26(목) 18:30–20:30 · 실습 가이드</p>
+    <h1>기록이 스펙이 되는 순간<br><span class="hl">AI 활용 커리어 아카이빙</span></h1>
+    <p class="lead">흩어져 있던 과제·프로젝트·활동 기록을 AI와 함께 노션 포트폴리오 한 곳에 모아, 진로·취업에 바로 쓰는 나만의 커리어 맵으로 만듭니다. 오늘은 노션에서 블록을 하나하나 만들지 않아요. AI에 내 노션을 연결하고 말로 시키면, AI가 대시보드와 프로젝트 저장소를 직접 만듭니다. 나는 노션에서 결과를 확인하고 고치기만 해요.</p>
+    <div class="meta"><span>⏱ 2시간</span><span>🤖 Claude + 노션</span><span>💸 무료 계정으로</span><span>🗺️ 나만의 커리어 맵</span></div>
+    <nav class="links" aria-label="바로가기"><a class="cta b1" href="https://www.notion.so" target="_blank" rel="noopener">Notion ↗</a><a class="cta b2" href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a><a class="cta b3" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a><a class="cta b4" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a><a class="cta b5" href="https://sanjinee.pusan.ac.kr/mcp/guest" target="_blank" rel="noopener">산지니 ↗</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section id="goal">
+  <div class="sec-head"><h2>오늘 완성할 대시보드</h2></div>
+  <div class="note ok"><b>오늘의 커리어 맵핑이란?</b><p>새로운 활동을 따로 하지 않아요. 실습에서 내 프로젝트와 활동을 대시보드에 모으면, AI가 각 기록의 <b>내 역할</b>과 <b>역량</b>을 정리해 줘요. 이렇게 쌓인 기록을 한눈에 보면 "내가 무엇을 해 왔고, 어떤 직무로 이어지는지"가 보이는데, 이것이 오늘 만드는 나만의 커리어 맵이에요.</p></div>
+  <div class="map" aria-label="오늘 만들 구조">
+    <div class="node"><b>AI (Claude)</b><span>내 말을 듣고 노션에 페이지·데이터베이스를 만듦</span></div>
+    <div class="arrow">→</div>
+    <div class="node key"><b>포트폴리오 대시보드</b><span>첫 페이지: 프로필, 프로젝트 탭 4개, 수상·자격·활동</span></div>
+    <div class="arrow">←</div>
+    <div class="node"><b>데이터베이스 2개</b><span>프로젝트 · 수상·자격·활동 (대시보드 안에 들어 있음)</span></div>
+  </div>
+  <p>대시보드는 노션 페이지 하나예요. 그 안에 데이터베이스 2개가 들어 있고, "프로젝트" 데이터베이스는 위쪽 탭을 눌러 갤러리·보드·캘린더·표로 바꿔 볼 수 있어요. 프로젝트 하나만 추가하면 모든 탭에 자동으로 나타나서, 한 번 만들어 두면 계속 쓸 수 있습니다. 왼쪽 사이드바에는 페이지 1개와 데이터베이스 2개만 보여서 깔끔해요.</p>
+  <div class="dash" aria-label="대시보드 배치 예시">
+    <div class="sk-cover">커버 이미지 · [이름] 포트폴리오</div>
+    <div class="blk"><b>프로필</b>이름 · 전공 · 한 줄 소개</div>
+    <div class="blk hot"><b>📂 프로젝트</b>데이터베이스 1개, 탭 4개
+      <div class="cols" style="grid-template-columns:repeat(4,1fr)"><span>📋 전체</span><span>⭐ 대표 작업</span><span>🔥 진행 상황</span><span>📅 일정</span></div>
+      <span style="font-size:.78rem">화면이 좁으면 실제 노션에선 탭 일부가 "○개 더 보기"로 접혀 보여요 (정상)</span></div>
+    <div class="blk"><b>🏅 수상·자격·활동</b>데이터베이스 1개, 표 (최신순)</div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>프로젝트</h3><p>과제·프로젝트·공모전 등 모든 작업. <span class="tag">상태</span> <span class="tag">분류</span> <span class="tag">기간</span> <span class="tag">내 역할</span> <span class="tag">역량</span> <span class="tag">한 줄 요약</span> <span class="tag">결과물 링크</span> <span class="tag">대표 작업</span></p></div>
+    <div class="card"><h3>수상·자격·활동</h3><p>수상, 자격증, 대외활동, 동아리, 인턴, 교육 수강. <span class="tag">종류</span> <span class="tag">기간</span> <span class="tag">기관</span> <span class="tag">내용</span></p></div>
+  </div>
+</section>
+
+<section id="before">
+  <div class="sec-head"><h2>시작 전에 확인하기</h2></div>
+  <ul class="check">
+    <li><label><input type="checkbox" id="pre1"><span>노션에 로그인했고, <b>내가 소유한 워크스페이스</b>가 있다 (다른 사람 워크스페이스에 게스트로 들어가 있으면 연결이 안 돼요. 무료 계정이면 충분해요)</span></label></li>
+    <li><label><input type="checkbox" id="pre2"><span>Claude(claude.ai) 무료 계정에 로그인했다</span></label></li>
+    <li><label><input type="checkbox" id="pre2b"><span>오늘 Claude 무료 사용량이 남아 있다 (무료는 "기능을 쓸 수 있다"와 "무제한"이 달라요. 수업 직전에는 다른 대화를 아껴 두세요)</span></label></li>
+    <li><label><input type="checkbox" id="pre3"><span>대안용으로 ChatGPT 계정도 있다 (Claude 사용량이 다 찼을 때 씀)</span></label></li>
+    <li><label><input type="checkbox" id="pre4"><span>포트폴리오에 넣을 프로젝트 1개(과제·팀 프로젝트·공모전 등의 파일, 메모, 스크린샷)를 준비했다</span></label></li>
+  </ul>
+  <div class="note tip"><b>이미 노션을 쓰고 있다면: 실습 전용 워크스페이스 추천</b><p>AI 연결은 페이지 단위가 아니라 <b>워크스페이스 전체 단위</b>예요. 기존 메모·일기가 있는 공간을 연결하기 부담스러우면, 사이드바 왼쪽 위 워크스페이스 이름 → <span class="ui">+ 새 워크스페이스</span>로 실습 전용 공간을 하나 만들어 그걸 연결하세요. 무료이고 개수 제한도 없어요. 이름은 <span class="ui">설정 → 일반</span>에서 "○○의 포트폴리오"처럼 바꿀 수 있어요.</p></div>
+  <p class="goal">체크 표시와 실습 단계의 "완료" 표시는 이 브라우저에만 저장돼요.</p>
+</section>
+
+<section id="schedule">
+  <div class="sec-head"><h2>오늘의 일정</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>시간</th><th>세션</th><th>끝났을 때 내 노션</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">18:30–18:40</td><td>오프닝: 커리어 아카이빙 소개 · 완성 대시보드 구경</td><td>오늘 만들 모습 이해</td></tr>
+      <tr><td class="mono">18:40–18:55</td><td>AI에 노션 연결하기</td><td>AI가 만든 테스트 페이지</td></tr>
+      <tr><td class="mono">18:55–19:20</td><td>실습 1: AI가 대시보드 만들기</td><td>대시보드 + 데이터베이스 2개 (마지막 3분: 직접 갤러리로 바꿔 보기)</td></tr>
+      <tr><td class="mono">19:20–19:30</td><td>휴식</td><td></td></tr>
+      <tr><td class="mono">19:30–20:00</td><td>실습 2: AI가 내 프로젝트 정리해 넣기</td><td>프로젝트 1개 + 수상·자격·활동 2~3개가 대시보드에 표시</td></tr>
+      <tr><td class="mono">20:00–20:15</td><td>실습 3: 대시보드 다듬기</td><td>소개글·커버가 들어간 대시보드</td></tr>
+      <tr><td class="mono">20:15–20:30</td><td>게시·서로 둘러보기</td><td>공유 가능한 포트폴리오 링크</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="connect">
+  <div class="sec-head"><span class="time">18:40 · 15분</span><h2>AI에 노션 연결하기</h2></div>
+  <p class="goal"><strong>목표:</strong> Claude가 내 노션에 페이지를 만들 수 있는지 확인한다.</p>
+  <ol class="steps" data-lab="connect">
+    <li><span class="n">1</span><div><p>claude.ai 왼쪽 사이드바의 <span class="ui">플러그인</span>(또는 내 이름 → <span class="ui">설정</span> → <span class="ui">플러그인</span>)에서 <b>Notion</b>을 찾아 <span class="ui">연결</span>을 눌러요.</p></div></li>
+    <li><span class="n">2</span><div><p>노션 인증 창이 뜨면 <b>내 워크스페이스</b>를 고르고 <span class="ui">계속하기</span>로 접근을 허용해요. 연결은 고른 워크스페이스 <b>전체</b>에 적용돼요 — 페이지만 골라서 연결할 수는 없어요. 실습 전용 워크스페이스를 만들었다면 여기서 그걸 선택하세요. 다른 워크스페이스로 바꾸고 싶으면 플러그인에서 Notion을 <span class="ui">연결 해제</span>한 뒤 다시 연결하면서 고르면 돼요.</p></div></li>
+    <li><span class="n">3</span><div><p>새 대화에서 아래 테스트 프롬프트를 보내요. AI가 노션 작업 허락을 물으면 내용을 읽고 <span class="ui">한 번 허용</span>을 눌러요. <span class="ui">항상 허용</span>은 누르지 마세요 — 무엇을 만드는지 보면서 허용하는 게 오늘의 원칙이에요.</p>
+      <div class="prompt"><div class="prompt-head"><span>테스트 프롬프트</span><button class="copy" type="button">복사</button></div><pre>내 노션에 "연결 테스트"라는 페이지를 만들고, 본문에 오늘 날짜를 한 줄 써 줘.
+만든 페이지 링크를 알려 주고, 실제로 만들지 못했다면 만들었다고 하지 말고 이유를 알려 줘.</pre></div>
+    </div></li>
+    <li><span class="n">4</span><div><p>노션 사이드바에 "연결 테스트" 페이지가 생겼는지 확인하고, 확인했으면 지워요.</p></div></li>
+  </ol>
+  <div class="note tip"><b>ChatGPT로 할 때</b><p>ChatGPT 설정의 앱(플러그인) 메뉴에서 Notion을 연결하면 같은 프롬프트를 쓸 수 있어요. 노션에 쓰기 전마다 승인 버튼이 뜹니다. 메뉴 이름은 업데이트에 따라 조금 다를 수 있어요.</p></div>
+  <div class="note warn"><b>권한 주의</b><p>AI는 내 노션 권한 그대로 움직여요. 처음에는 쓰기 작업마다 승인하도록 두고, 무엇을 만드는지 보면서 허용하세요.</p></div>
+  <div class="note ok"><b>오늘의 핵심 습관: 시키기 → 직접 확인</b><p>AI의 "다 했어요"라는 답과 실제 노션은 다를 수 있어요. AI가 무언가를 만들었다고 하면 반드시 노션을 직접 열어 눈으로 확인해요. 오늘 모든 실습이 이 순서로 진행됩니다.</p></div>
+</section>
+
+<section id="lab1">
+  <div class="sec-head"><span class="time">18:55 · 25분</span><h2>실습 1. AI가 대시보드 만들기</h2></div>
+  <p class="goal"><strong>목표:</strong> 프롬프트 하나로 대시보드 페이지와 데이터베이스 2개를 AI가 만들게 한다.</p>
+  <ol class="steps" data-lab="lab1">
+    <li><span class="n">1</span><div><p>새 대화를 열고, [ ] 부분만 내 정보로 바꿔서 아래 프롬프트를 통째로 보내요. <b>박스 안을 클릭하면 바로 고쳐 쓸 수 있어요</b> — 고친 내용은 이 브라우저에 저장되고, 망치면 <span class="ui">원래대로</span>를 누르면 돼요.</p>
+      <div class="prompt"><div class="prompt-head"><span>프롬프트 1 · 대시보드 만들기</span><button class="copy" type="button">복사</button></div><pre>내 노션에 졸업 때까지 쓸 포트폴리오 대시보드를 만들어 줘.
+나는 [전공] [학년] 학생이고 [진로/지원 분야]를 준비하고 있어.
+
+1) "[이름] 포트폴리오" 페이지를 만들고, 맨 위에 프로필 콜아웃(이름, 전공, 한 줄 소개)을 넣어. 전화번호나 이메일 같은 연락처 칸은 만들지 마.
+
+2) 그 아래에 페이지 안에 바로 보이는 인라인 데이터베이스 "📂 프로젝트"를 만들어. 속성:
+- 프로젝트명(제목)
+- 상태(선택: 아이디어, 진행 중, 완료)
+- 분류(선택: 수업 과제, 팀 프로젝트, 공모전, 대외활동, 개인 작업)
+- 기간(날짜, 시작~끝)
+- 내 역할(텍스트), 역량(다중 선택), 한 줄 요약(텍스트)
+- 결과물 링크(URL), 대표 작업(체크박스)
+이 데이터베이스 안에 보기 탭 4개를 만들어:
+"📋 전체"(표, 기간 최신순), "⭐ 대표 작업"(갤러리, 대표 작업이 체크된 것만), "🔥 진행 상황"(보드, 상태별), "📅 일정"(캘린더, 기간 기준)
+
+3) 그 아래에 인라인 데이터베이스 "🏅 수상·자격·활동"을 만들어. 속성:
+활동명(제목), 종류(선택: 수상, 자격증, 대외활동, 동아리, 인턴, 교육 수강), 기간(날짜), 기관(텍스트), 내용(텍스트)
+보기는 표 1개, 이름 "최신순", 기간 최신순.
+
+4) 제목(헤딩) 블록은 따로 만들지 마 — 데이터베이스 이름이 제목 역할을 해. 링크된 보기나 하위 페이지도 만들지 마. 페이지 안에는 프로필과 데이터베이스 2개만 있으면 돼.
+
+5) "📂 프로젝트"와 "🏅 수상·자격·활동"에 이름이 [예시]로 시작하는 샘플을 하나씩 넣어 줘.
+
+이 페이지 밖의 내 노션 문서는 건드리지 마.
+
+다 만든 뒤에 만든 것과 못 만든 것을 목록으로 알려 줘. 못 만든 것을 만든 것처럼 말하지 마.</pre><pre class="ex" hidden>내 노션에 졸업 때까지 쓸 포트폴리오 대시보드를 만들어 줘.
+나는 경영학과 3학년 학생이고 마케팅 직무 취업을 준비하고 있어.
+
+1) "김하늘 포트폴리오" 페이지를 만들고, 맨 위에 프로필 콜아웃(이름, 전공, 한 줄 소개)을 넣어. 전화번호나 이메일 같은 연락처 칸은 만들지 마.
+
+2) 그 아래에 페이지 안에 바로 보이는 인라인 데이터베이스 "📂 프로젝트"를 만들어. 속성:
+- 프로젝트명(제목)
+- 상태(선택: 아이디어, 진행 중, 완료)
+- 분류(선택: 수업 과제, 팀 프로젝트, 공모전, 대외활동, 개인 작업)
+- 기간(날짜, 시작~끝)
+- 내 역할(텍스트), 역량(다중 선택), 한 줄 요약(텍스트)
+- 결과물 링크(URL), 대표 작업(체크박스)
+이 데이터베이스 안에 보기 탭 4개를 만들어:
+"📋 전체"(표, 기간 최신순), "⭐ 대표 작업"(갤러리, 대표 작업이 체크된 것만), "🔥 진행 상황"(보드, 상태별), "📅 일정"(캘린더, 기간 기준)
+
+3) 그 아래에 인라인 데이터베이스 "🏅 수상·자격·활동"을 만들어. 속성:
+활동명(제목), 종류(선택: 수상, 자격증, 대외활동, 동아리, 인턴, 교육 수강), 기간(날짜), 기관(텍스트), 내용(텍스트)
+보기는 표 1개, 이름 "최신순", 기간 최신순.
+
+4) 제목(헤딩) 블록은 따로 만들지 마 — 데이터베이스 이름이 제목 역할을 해. 링크된 보기나 하위 페이지도 만들지 마. 페이지 안에는 프로필과 데이터베이스 2개만 있으면 돼.
+
+5) "📂 프로젝트"와 "🏅 수상·자격·활동"에 이름이 [예시]로 시작하는 샘플을 하나씩 넣어 줘.
+
+이 페이지 밖의 내 노션 문서는 건드리지 마.
+
+다 만든 뒤에 만든 것과 못 만든 것을 목록으로 알려 줘. 못 만든 것을 만든 것처럼 말하지 마.</pre></div>
+      <p class="goal">치환 예시 — "나는 <b>경영학과 3학년</b> 학생이고 <b>마케팅 직무 취업</b>을 준비하고 있어", 페이지 이름은 "<b>김하늘 포트폴리오</b>". 예시를 그대로 베끼지 말고 꼭 내 정보로 바꾸세요.</p>
+    </div></li>
+    <li><span class="n">2</span><div><p>AI가 일하는 동안 승인 요청이 여러 번 뜰 수 있어요. 무엇을 만드는지 읽고 허용해요.</p></div></li>
+    <li><span class="n">3</span><div><p>AI가 "다 만들었어요"라고 답해도 끝난 게 아니에요. 노션에서 "[이름] 포트폴리오"를 직접 열고 아래를 눈으로 확인해요.</p>
+      <ul style="margin:0;padding-left:1.1em"><li>페이지 안에 프로필, "📂 프로젝트", "🏅 수상·자격·활동"이 차례로 보이나요? 이름이 한 번씩만 나오면 정상이에요.</li><li>"📂 프로젝트" 위쪽에 탭 4개(전체·대표 작업·진행 상황·일정)가 있나요? 하나씩 눌러 보세요. 일부가 "○개 더 보기"로 접혀 있으면 화면 폭 때문이에요 — 눌러서 펼치면 되고, 없어진 게 아니에요.</li><li>왼쪽 사이드바에 내 포트폴리오 아래로 데이터베이스 2개만 보이나요?</li></ul></div></li>
+    <li><span class="n">4</span><div><p>결과가 완벽하지 않아도 괜찮아요. 증상에 맞는 처방을 골라 쓰세요.</p>
+      <ul style="margin:0;padding-left:1.1em">
+        <li><b>탭이 4개보다 적다</b> → 같은 대화에서 "빠진 [탭 이름] 탭만 '📂 프로젝트' 안에 다시 만들어 줘". 그래도 안 되면 탭 줄 끝의 <span class="ui">+</span>로 직접 추가해요.</li>
+        <li><b>탭이 5개다</b> ("Default view" 포함) → 그 탭 이름을 클릭하고 <span class="ui">보기 삭제</span>를 눌러요. 기본 탭은 AI가 못 지워서 직접 해야 해요. (자주 있는 일!)</li>
+        <li><b>사이드바에 "○○ 보기" 페이지가 여러 개 생겼다</b> → AI가 탭 대신 '링크된 보기'(원본을 비추는 별도 블록)를 만든 거예요. "링크된 보기는 지우고 탭으로 바꿔 줘"라고 시키세요.</li>
+        <li><b>탭이 "○개 더 보기"로 접혀서 한 줄에 다 안 보인다</b> → 없어진 게 아니라 화면 폭 때문이에요. 화면 오른쪽 맨 위 <span class="ui">•••</span>(공유 옆) → <span class="ui">테마와 레이아웃</span> → <span class="ui">전체 너비</span>를 켜면 펼쳐져요.</li>
+      </ul></div></li>
+  <li><span class="n">5</span><div><p><b>직접 갤러리로 바꿔 보기 (3분)</b> — 이번엔 AI 없이 내 손으로 보기를 바꿔 봐요. "📂 프로젝트"의 <b>📋 전체</b> 탭 이름을 클릭하고, 한 번 더 클릭해서 메뉴를 열고 <span class="ui">보기 편집</span> → <span class="ui">레이아웃</span> → <span class="ui">갤러리</span>를 고르세요.</p>
+      <ul style="margin:0;padding-left:1.1em"><li>표가 카드 모양으로 바뀌었나요? [예시] 샘플은 그대로 있어요. <b>보기(모양)만 바뀌고 데이터는 그대로</b>라는 뜻이에요.</li><li>다른 탭(⭐ 대표 작업·🔥 진행 상황·📅 일정)은 그대로인지 눌러 보세요. 보기는 탭마다 따로예요.</li><li>"🏅 수상·자격·활동"도 같은 방법(탭 이름 클릭 → 한 번 더 클릭 → <span class="ui">보기 편집</span> → <span class="ui">레이아웃</span> → <span class="ui">갤러리</span>)으로 바꿀 수 있어요. 표가 편하면 다시 <span class="ui">표</span>를 고르면 돼요.</li></ul></div></li>
+  </ol>
+  <div class="note tip"><b>왜 한 번에 시킬까요?</b><p>무료 사용량은 대화가 오갈수록 빨리 줄어요. 원하는 구조를 한 프롬프트에 다 적으면 사용량도 아끼고 결과도 더 일정해요.</p></div>
+  <div class="note ok"><b>여기까지 됐다면</b><p>[예시] 샘플이 "전체" 탭과 "진행 상황" 탭에 모두 보이면 성공이에요. 데이터 하나가 여러 탭에 자동으로 나타난다는 뜻이에요.</p></div>
+</section>
+
+<section id="lab2">
+  <div class="sec-head"><span class="time">19:30 · 30분</span><h2>실습 2. AI가 내 프로젝트 정리해 넣기</h2></div>
+  <p class="goal"><strong>목표:</strong> 내 프로젝트 1개와 수상·자격·활동 2~3개를 AI가 저장소에 넣고, 대시보드에 나타나는지 확인한다.</p>
+  <ol class="steps" data-lab="lab2">
+    <li><span class="n">1</span><div><p>새 대화에서 프로젝트 파일을 첨부하거나 메모·보고서 내용을 붙여 넣고 아래 프롬프트를 보내요.</p>
+      <div class="prompt"><div class="prompt-head"><span>프롬프트 2 · 프로젝트 추가</span><button class="copy" type="button">복사</button></div><pre>내 노션 "📂 프로젝트"에 아래 자료로 새 프로젝트를 추가해 줘.
+
+- 속성: 프로젝트명, 상태는 완료, 분류, 기간, 내 역할(한 문장), 역량(3개 이내), 한 줄 요약(40자 이내)을 채워 줘.
+- 본문: 한 줄 요약 / 배경 / 내 역할 / 과정 / 결과(숫자가 있으면 숫자로) / 배운 점 / 결과물 섹션으로, 각 2~3문장.
+- 과장 없이 내가 한 일 중심으로 쓰고, 자료에 없는 내용은 지어내지 말고 [확인 필요]라고 적어 줘.
+- 이 작업이 포트폴리오에 보여줄 만하면 대표 작업에 체크해 줘.
+- "📂 프로젝트"의 [예시] 샘플은 지워 줘. "🏅 수상·자격·활동" 쪽은 건드리지 마.
+- 다 넣은 뒤 만든 페이지 링크를 알려 줘.
+
+[자료: 아래 빈칸을 채우거나, 지우고 보고서 요약·메모를 붙여 넣으세요. 파일 첨부도 돼요.]
+- 프로젝트 이름과 과목/대회: [예: 경영통계 팀 프로젝트]
+- 기간과 팀 구성: [예: 2026.4~6, 팀 4명]
+- 무엇을 했나: [예: 교내 카페 설문 182건 분석해 시간대별 할인 제안]
+- 내가 맡은 일: [예: 설문 설계, 데이터 정리, 그래프 제작]
+- 결과: [예: 발표 A+, 수업 우수 사례 선정]
+- 사용한 도구: [예: 엑셀, 구글 폼]</pre><pre class="ex" hidden>내 노션 "📂 프로젝트"에 아래 자료로 새 프로젝트를 추가해 줘.
+
+- 속성: 프로젝트명, 상태는 완료, 분류, 기간, 내 역할(한 문장), 역량(3개 이내), 한 줄 요약(40자 이내)을 채워 줘.
+- 본문: 한 줄 요약 / 배경 / 내 역할 / 과정 / 결과(숫자가 있으면 숫자로) / 배운 점 / 결과물 섹션으로, 각 2~3문장.
+- 과장 없이 내가 한 일 중심으로 쓰고, 자료에 없는 내용은 지어내지 말고 [확인 필요]라고 적어 줘.
+- 이 작업이 포트폴리오에 보여줄 만하면 대표 작업에 체크해 줘.
+- "📂 프로젝트"의 [예시] 샘플은 지워 줘. "🏅 수상·자격·활동" 쪽은 건드리지 마.
+- 다 넣은 뒤 만든 페이지 링크를 알려 줘.
+
+자료:
+- 프로젝트 이름과 과목/대회: 경영통계 팀 프로젝트
+- 기간과 팀 구성: 2026.4~6, 팀 4명
+- 무엇을 했나: 교내 카페 설문 182건 분석해 시간대별 할인 제안
+- 내가 맡은 일: 설문 설계, 데이터 정리, 그래프 제작
+- 결과: 발표 A+, 수업 우수 사례 선정
+- 사용한 도구: 엑셀, 구글 폼</pre></div>
+      <p class="goal">자료는 보고서 전체가 아니라 이 정도 메모면 충분해요. 예시 문구는 참고만 하고 꼭 내 내용으로 바꾸세요 — 하지 않은 일을 넣으면 안 돼요. <b>예시 넣기</b> 버튼은 채운 모습을 구경하는 연습용이에요.</p>
+    </div></li>
+    <li><span class="n">2</span><div><p>AI가 알려 준 링크로 새 프로젝트 페이지를 열어 속성과 본문이 자료와 맞는지 보고, <b>[확인 필요]</b> 표시를 직접 고쳐요. 그리고 결과물 스크린샷을 커버로 넣어요:</p>
+      <ul style="margin:0;padding-left:1.1em">
+        <li>페이지 <b>제목 바로 위 빈 공간에 마우스를 올리면</b> 흐린 버튼이 나타나요 → <span class="ui">커버 추가</span> 클릭 (노션이 임의의 기본 커버를 깔아줘요)</li>
+        <li>내 이미지로 바꾸기: 커버 위에 마우스 → 오른쪽 아래 <span class="ui">커버 변경</span> → <span class="ui">업로드</span> → 스크린샷 선택 (무료 플랜은 파일 1개당 5MB까지 — 스크린샷이면 충분해요)</li>
+        <li>그림 위치가 어색하면 <span class="ui">위치 변경</span>을 눌러 드래그로 조정해요</li>
+        <li>이 커버가 ⭐ 대표 작업 갤러리의 <b>카드 그림</b>이 돼요</li>
+      </ul></div></li>
+    <li><span class="n">3</span><div><p>대시보드로 돌아가 "📂 프로젝트"의 탭을 하나씩 눌러 보세요. 내 프로젝트가 <b>전체, ⭐ 대표 작업, 🔥 진행 상황(완료 칸), 📅 일정</b>에 모두 나타나면 성공이에요.</p></div></li>
+    <li><span class="n">4</span><div><p>이제 수상·자격·활동도 한 번에 넣어요. 끝나면 수상·자격·활동 표에 다 들어왔는지, [예시] 샘플이 지워졌는지 확인해요.</p>
+      <div class="prompt"><div class="prompt-head"><span>프롬프트 3 · 수상·자격·활동 추가</span><button class="copy" type="button">복사</button></div><pre>내 노션 "🏅 수상·자격·활동"에 아래 항목들을 각각 한 줄씩 추가해 줘. 종류, 기간, 기관, 내용(한 문장)을 채우고 [예시] 샘플은 지워 줘.
+
+- [예: 2025.11 ○○공모전 장려상]
+- [예: 2025.03~2025.12 ○○동아리 기획팀]
+- [예: 2026.01 컴퓨터활용능력 1급]</pre><pre class="ex" hidden>내 노션 "🏅 수상·자격·활동"에 아래 항목들을 각각 한 줄씩 추가해 줘. 종류, 기간, 기관, 내용(한 문장)을 채우고 [예시] 샘플은 지워 줘.
+
+- 2026.11 AI 활용 커리어 아카이빙 특강 수강 (부산대학교)
+- 2026.03~2026.12 마케팅 동아리 기획팀 활동
+- 2026.01 컴퓨터활용능력 1급 취득</pre></div>
+    </div></li>
+  </ol>
+  <div class="note tip"><b>커버를 넣었는데 ⭐ 대표 작업 카드에 그림이 안 떠요?</b><p>AI가 못 하는 설정 하나예요. <b>⭐ 대표 작업 탭 이름을 클릭하고, 한 번 더 클릭</b>해서 메뉴를 열고 <span class="ui">보기 편집</span> → <span class="ui">레이아웃</span> → <span class="ui">카드 미리보기: 페이지 커버</span>로 바꾸면 돼요. 10초면 됩니다. (데이터베이스 제목 옆 •••의 "레이아웃 편집"은 다른 메뉴예요 — 헷갈리지 마세요!)</p></div>
+  <div class="note warn"><b>꼭 확인하기</b><p>팀 프로젝트라면 팀원 몫까지 내 성과처럼 쓰지 않았는지 확인하세요. 포트폴리오의 신뢰는 "내 역할"에서 나옵니다.</p></div>
+  <div class="note tip"><b>실수로 지워졌다면: 복구 방법 2가지</b><p>① <b>AI에게 시키기</b> — "방금 지운 '[페이지 이름]'을 휴지통에서 복구해 줘." ② <b>직접 하기</b> — 노션 사이드바 아래 <span class="ui">휴지통</span>에서 항목을 찾아 <span class="ui">복원(↺)</span>을 눌러요. 지워진 것은 휴지통에 남아 있으니 당황하지 않아도 돼요.</p></div>
+</section>
+
+<section id="lab3">
+  <div class="sec-head"><span class="time">20:00 · 15분</span><h2>실습 3. 대시보드 다듬기</h2></div>
+  <p class="goal"><strong>목표:</strong> 프로필과 소개를 채우고, 나에게 맞는 분위기로 정리한다.</p>
+  <ol class="steps" data-lab="lab3">
+    <li><span class="n">1</span><div><p>아래 프롬프트로 AI가 프로필 콜아웃과 소개를 채우게 해요.</p>
+      <div class="prompt"><div class="prompt-head"><span>프롬프트 4 · 프로필과 소개</span><button class="copy" type="button">복사</button></div><pre>내 노션 "[이름] 포트폴리오" 대시보드의 프로필 콜아웃을 채워 줘.
+나는 [키워드 3~5개: 예) 사용자 조사, 꼼꼼함, 데이터 시각화] 같은 사람이야.
+- 한 줄 소개 1개와 3문장 소개글을 써서 넣어 줘.
+- "📂 프로젝트"와 "🏅 수상·자격·활동"에 들어간 내용을 근거로 쓰고, 거기에 없는 성과나 경험은 지어내지 마.
+- 콜아웃 배경색과 각 섹션 제목 색은 [차분한/밝은/모던한] 분위기에 맞게 노션 기본 색 2~3개로 통일해 줘.
+- 전화번호나 이메일 같은 연락처는 넣지 마.</pre><pre class="ex" hidden>내 노션 "김하늘 포트폴리오" 대시보드의 프로필 콜아웃을 채워 줘.
+나는 사용자 조사, 꼼꼼함, 데이터 시각화 같은 사람이야.
+- 한 줄 소개 1개와 3문장 소개글을 써서 넣어 줘.
+- "📂 프로젝트"와 "🏅 수상·자격·활동"에 들어간 내용을 근거로 쓰고, 거기에 없는 성과나 경험은 지어내지 마.
+- 콜아웃 배경색과 각 섹션 제목 색은 차분한 분위기에 맞게 노션 기본 색 2~3개로 통일해 줘.
+- 전화번호나 이메일 같은 연락처는 넣지 마.</pre></div>
+      <p class="goal"><b>콜아웃</b>은 아이콘과 배경색이 있는 노션의 강조 상자예요. 대시보드 맨 위의 프로필 상자(이름·전공·한 줄 소개가 든 색 있는 박스)가 바로 콜아웃이에요.</p>
+    </div></li>
+    <li><span class="n">2</span><div><p>대시보드 맨 위에 들어갈 커버 이미지를 ChatGPT나 Gemini에서 만들어요. 아래 프롬프트를 보내고, 나온 이미지를 저장해요.</p>
+      <div class="prompt"><div class="prompt-head"><span>커버 이미지 프롬프트 · ChatGPT/Gemini에 보내기</span><button class="copy" type="button">복사</button></div><pre>대학생 포트폴리오 페이지의 커버 이미지를 만들어 줘.
+- 분위기: [차분한/밝은/모던한]
+- 색감: [예: 파스텔 블루 계열]
+- 스타일: [예: 미니멀한 일러스트, 부드러운 그라데이션]
+- 글자나 로고는 넣지 말고, 가로로 넓은 비율(3:1 정도)로 만들어 줘.</pre><pre class="ex" hidden>전문적인 느낌의 프로필 배너 이미지를 만들어 줘.
+부드러운 파스텔 블루-라벤더 그라데이션 배경에, 가는 선으로 된 기하학 도형(원, 곡선)이 은은하게 흐르는 모던 추상 디자인.
+차분하고 세련된 분위기, 글자 없이, 가로로 넓은 비율(3:1).</pre><pre class="ex" hidden>대학생 포트폴리오의 커버 이미지를 만들어 줘.
+위에서 내려다본 깔끔한 책상: 노트북, 펼쳐진 노트, 펜, 커피잔이 여백 있게 배치된 미니멀 플랫레이.
+파스텔 블루와 크림색 톤, 부드러운 자연광, 세련된 일러스트풍.
+글자나 로고 없이, 가로로 넓은 비율(3:1), 핵심 요소가 세로 중앙에 오게.</pre><pre class="ex" hidden>대학생의 성장을 담은 포트폴리오 커버 일러스트를 만들어 줘.
+새벽 하늘 그라데이션 아래 완만한 언덕길과 작은 이정표들이 이어지는 풍경, 미니멀하고 평화로운 플랫 일러스트.
+파스텔 톤, 글자 없이, 가로로 넓은 비율(3:1), 지평선이 세로 중앙에 오게.</pre></div>
+      <p class="goal">이 프롬프트는 노션이 아니라 <b>ChatGPT나 Gemini 대화창</b>에 보내는 거예요. 무료 이미지 생성은 하루 횟수 제한이 있으니 2~3번 안에 고르세요. 생성이 안 되면 노션 기본 커버로도 충분해요. 예시 넣기를 여러 번 누르면 다른 스타일의 프롬프트가 나와요.</p>
+      <div class="note tip"><b>만든 이미지를 대시보드 커버로 넣는 법</b>
+        <ul style="margin:0;padding-left:1.1em">
+          <li>이미지에 마우스를 올려 <b>다운로드(↓)</b>로 저장해요 (아이콘이 없으면 이미지 우클릭 → 다른 이름으로 저장)</li>
+          <li>노션에서 <b>"[이름] 포트폴리오" 대시보드</b>를 열어요 — 프로젝트 페이지가 아니라 맨 바깥 페이지예요</li>
+          <li>커버가 없으면: 제목 바로 위 빈 공간에 마우스 → <span class="ui">커버 추가</span></li>
+          <li>커버 위에 마우스를 올리면 오른쪽 아래에 버튼이 떠요 → <span class="ui">커버 변경</span> → <span class="ui">업로드</span> → 방금 받은 파일 선택</li>
+          <li><span class="ui">위치 변경</span>을 눌러 위아래로 끌어 보기 좋은 부분을 맞추고 저장해요. 노션 커버는 <b>가운데 가로 띠만</b> 보여요</li>
+        </ul>
+      </div>
+    </div></li>
+    <li><span class="n">3</span><div><p>휴대폰 노션 앱으로 대시보드를 열어 위쪽이 잘 보이는지 확인해요. 휴대폰에서는 열이 세로로 쌓이니 중요한 것이 위에 있어야 해요.</p>
+      <p>이때 <b>개인정보가 섞여 있지 않은지</b>도 같이 봐요. 곧 웹에 공개할 페이지라 링크를 아는 누구나 볼 수 있어요.</p>
+      <ul style="margin:0;padding-left:1.1em">
+        <li><b>넣지 않기</b>: 전화번호, 학번, 주소, 생년월일, 주민번호</li>
+        <li><b>조심해서</b>: 이메일 — 수업에서는 빼고, 나중에 취업용으로 꼭 필요할 때만 추가해요</li>
+        <li><b>프로젝트 본문도 확인</b>: 팀원 실명·연락처, 회사·기관의 비공개 자료가 들어가지 않았는지</li>
+      </ul></div></li>
+    <li><span class="n">4</span><div><p>고치고 싶은 것이 생기면 <b>한 메시지에 모아서</b> 시켜요. 하나씩 보내는 것보다 사용량도 아끼고 결과도 일정해요.</p>
+      <div class="prompt"><div class="prompt-head"><span>추가 프롬프트 · 대시보드 고치기</span><button class="copy" type="button">복사</button></div><pre>내 노션 "[이름] 포트폴리오" 대시보드를 아래대로 고쳐 줘.
+- [고칠 내용 1]
+- [고칠 내용 2]
+
+데이터베이스 안의 항목과 속성, 보기 탭은 그대로 두고, 이 페이지 밖의 문서는 건드리지 마.
+다 한 뒤에 바꾼 것과 못 바꾼 것을 알려 줘. 못 한 것을 한 것처럼 말하지 마.</pre><pre class="ex" hidden>내 노션 "김하늘 포트폴리오" 대시보드를 아래대로 고쳐 줘.
+- 프로필 콜아웃 배경색을 연한 회색으로 바꿔 줘.
+- 소개글을 2문장으로 줄여 줘.
+- "🏅 수상·자격·활동"의 종류 선택지에 "봉사활동"을 추가해 줘.
+
+데이터베이스 안의 항목과 속성, 보기 탭은 그대로 두고, 이 페이지 밖의 문서는 건드리지 마.
+다 한 뒤에 바꾼 것과 못 바꾼 것을 알려 줘. 못 한 것을 한 것처럼 말하지 마.</pre></div>
+      <p class="goal">이렇게 시킬 수 있어요 — 콜아웃 색 바꾸기, 소개글 다시 쓰기, 선택지에 항목 추가하기, 잘못 들어간 블록 지우기, 속성 이름 바꾸기. 반대로 <b>탭 순서나 카드 모양처럼 AI가 못 하는 것</b>은 노션에서 직접 하면 돼요.</p>
+    </div></li>
+  </ol>
+  <div class="note tip"><b>같은 제목이 두 줄로 보인다면</b><p>AI가 제목 블록을 따로 만들어서 데이터베이스 이름과 겹친 거예요. 둘 중 하나만 없애면 돼요: ① 위의 <b>제목 블록을 지우기</b>(블록에 마우스 → 왼쪽 ⋮⋮ → 삭제), ② 탭 이름을 클릭하고 <b>한 번 더 클릭</b>해서 <span class="ui">데이터 소스 제목 숨기기</span> 켜기. 데이터베이스 두 개 모두 같은 방법이에요.</p></div>
+</section>
+
+<section id="publish">
+  <div class="sec-head"><span class="time">20:15 · 15분</span><h2>게시·서로 둘러보기</h2></div>
+  <p>대시보드 페이지를 그대로 웹에 게시해요. 공개 전에 AI에게 한 번 점검을 맡기면 안심이에요.</p>
+  <ol class="steps" data-lab="pub">
+    <li><span class="n">1</span><div>
+      <div class="prompt"><div class="prompt-head"><span>프롬프트 5 · 공개 전 점검</span><button class="copy" type="button">복사</button></div><pre>내 노션 "[이름] 포트폴리오"를 웹에 공개하려고 해. 페이지와 데이터베이스를 읽고,
+1) 남에게 보이면 곤란한 내용(전화번호·학번·주소 같은 개인정보, [확인 필요] 표시, 미완성 문장)이 있는지 목록으로 알려 줘.
+2) [예시]로 시작하는 샘플이 남아 있으면 지워 줘.
+다른 것은 바꾸지 마.</pre><pre class="ex" hidden>내 노션 "김하늘 포트폴리오"를 웹에 공개하려고 해. 페이지와 데이터베이스를 읽고,
+1) 남에게 보이면 곤란한 내용(전화번호·학번·주소 같은 개인정보, [확인 필요] 표시, 미완성 문장)이 있는지 목록으로 알려 줘.
+2) [예시]로 시작하는 샘플이 남아 있으면 지워 줘.
+다른 것은 바꾸지 마.</pre></div>
+    </div></li>
+    <li><span class="n">2</span><div><p>"📂 프로젝트"의 <b>⭐ 대표 작업</b> 탭을 마우스로 끌어 맨 앞으로 옮겨요. 방문자가 처음 보는 탭이 돼요.</p></div></li>
+    <li><span class="n">3</span><div><p>오른쪽 위 <span class="ui">공유</span> → <span class="ui">게시</span>에서 웹에 게시해요. 게시는 버튼으로 직접 해야 해요. 게시 링크를 <b>로그아웃한 창(시크릿 창)</b>에서 열어 잘 보이는지 확인해요.</p></div></li>
+    <li><span class="n">4</span><div><p>강사가 알려 준 <b>패들렛(Padlet)</b>에 <b>이름 + 공개 링크</b>를 올리고, 다른 사람의 포트폴리오를 <b>3개 이상</b> 둘러본 뒤 마음에 드는 아이디어 1개를 AI에게 시켜 바로 적용해 봐요.</p></div></li>
+  </ol>
+</section>
+
+<section id="ai-tips">
+  <div class="sec-head"><h2>무료 AI 팁</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>하고 싶은 일</th><th>추천</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>노션 만들기·프로젝트 정리</td><td>Claude + 노션 연결</td><td>무료에서도 노션에 페이지와 데이터베이스를 만들 수 있어요</td></tr>
+      <tr><td>Claude 사용량이 다 찼을 때</td><td>ChatGPT + 노션 연결</td><td>같은 프롬프트를 그대로 쓸 수 있어요 (쓰기마다 승인)</td></tr>
+      <tr><td>커버 이미지 만들기</td><td>ChatGPT 또는 Gemini</td><td>무료에서도 이미지 생성이 돼요 (하루 횟수 제한 있음)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card">
+    <h3>무료 사용량 아끼는 법</h3>
+    <ul>
+      <li><b>한 번에 다 담기</b>: 노션 연결 작업은 사용량을 많이 써요. 원하는 결과를 프롬프트 하나에 모두 적어요.</li>
+      <li><b>일마다 새 대화</b>: 긴 대화를 이어 가면 한도가 빨리 차요. 프로젝트 하나당 대화 하나.</li>
+      <li><b>자료는 필요한 부분만</b>: 보고서 전체보다 요약·목차·결과 부분만.</li>
+      <li><b>한도에 걸리면</b>: 기다리지 말고 ChatGPT에 같은 프롬프트를 쓰세요.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="after">
+  <div class="sec-head"><h2>수업 후 루틴: AI에게 한 줄로 시키기</h2></div>
+  <p class="goal"><strong>목표:</strong> 노션을 직접 열지 않아도 AI와의 대화로 저장소가 계속 쌓이게 한다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>언제</th><th>AI에게 이렇게</th><th>대시보드 변화</th></tr></thead>
+    <tbody>
+      <tr><td>과제·프로젝트를 시작할 때</td><td>"📂 프로젝트에 '[과제명]' 추가해 줘. 상태 진행 중, 기간 [시작]~[마감], 분류 [수업 과제]."</td><td>보드 "진행 중"과 캘린더에 표시</td></tr>
+      <tr><td>끝났을 때</td><td>프롬프트 6 + 자료 첨부</td><td>"완료"로 이동, 대표 작업이면 갤러리에 표시</td></tr>
+      <tr><td>상·자격증·활동이 생겼을 때</td><td>"🏅 수상·자격·활동에 '[내용]' 추가해 줘. 종류 [수상], 기간 [날짜]."</td><td>수상·자격·활동 표에 표시</td></tr>
+      <tr><td>학기 말</td><td>프롬프트 7</td><td>대표 작업·소개글 업데이트</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prompt"><div class="prompt-head"><span>프롬프트 6 · 작업 완료 처리</span><button class="copy" type="button">복사</button></div><pre>내 노션 "📂 프로젝트"의 "[과제명]"을 완료로 바꾸고, 아래 자료로 내용을 채워 줘.
+새 항목을 만들지 말고 기존 항목을 수정해야 해. 같은 이름이 안 보이면 만들지 말고 나에게 물어봐.
+- 속성: 내 역할(한 문장), 역량(3개 이내), 한 줄 요약(40자 이내), 결과물 링크
+- 본문: 배경 / 내 역할 / 과정 / 결과(숫자가 있으면 숫자로) / 배운 점, 각 2~3문장
+- 자료에 없는 내용은 [확인 필요]로 표시해 줘.
+
+[자료 붙여넣기 또는 파일 첨부]</pre><pre class="ex" hidden>내 노션 "📂 프로젝트"의 "경영통계 팀 프로젝트"를 완료로 바꾸고, 아래 자료로 내용을 채워 줘.
+새 항목을 만들지 말고 기존 항목을 수정해야 해. 같은 이름이 안 보이면 만들지 말고 나에게 물어봐.
+- 속성: 내 역할(한 문장), 역량(3개 이내), 한 줄 요약(40자 이내), 결과물 링크
+- 본문: 배경 / 내 역할 / 과정 / 결과(숫자가 있으면 숫자로) / 배운 점, 각 2~3문장
+- 자료에 없는 내용은 [확인 필요]로 표시해 줘.
+
+자료:
+- 무엇을 했나: 교내 카페 설문 182건 분석해 시간대별 할인 제안
+- 내가 맡은 일: 설문 설계, 데이터 정리, 그래프 제작
+- 결과: 발표 A+, 수업 우수 사례 선정
+- 사용한 도구: 엑셀, 구글 폼</pre></div>
+  <div class="prompt"><div class="prompt-head"><span>프롬프트 7 · 학기 말 점검</span><button class="copy" type="button">복사</button></div><pre>내 노션 "📂 프로젝트"와 "🏅 수상·자격·활동"을 읽고 아래를 해 줘. 노션을 바꾸기 전에 바꿀 내용을 먼저 보여 주고 내 확인을 받아.
+1) [지원 분야/직무]에 가장 잘 맞는 대표 작업 3개를 고르고 이유를 한 줄씩
+2) 대표 작업 체크를 그 3개로 바꾸기
+3) 지금 부족해 보이는 경험이나 역량 2가지 짚기
+4) 대시보드 프로필의 소개글을 새로 쓰기</pre><pre class="ex" hidden>내 노션 "📂 프로젝트"와 "🏅 수상·자격·활동"을 읽고 아래를 해 줘. 노션을 바꾸기 전에 바꿀 내용을 먼저 보여 주고 내 확인을 받아.
+1) 마케팅 직무에 가장 잘 맞는 대표 작업 3개를 고르고 이유를 한 줄씩
+2) 대표 작업 체크를 그 3개로 바꾸기
+3) 지금 부족해 보이는 경험이나 역량 2가지 짚기
+4) 대시보드 프로필의 소개글을 새로 쓰기</pre></div>
+  <div class="note tip"><b>팁</b><p>자주 쓰는 프롬프트는 대시보드의 "바로가기" 콜아웃에 붙여 두면 다음에 복사하기 편해요.</p></div>
+  <div class="note ok"><b>노션에서 직접 고쳐도 돼요</b><p>AI를 거치지 않고 노션에서 바로 추가·수정해도 같은 데이터베이스에 쌓여요. 다음에 AI에게 시키면 그 내용을 그대로 읽고 이어서 일합니다. 어느 쪽에서 고치든 포트폴리오는 하나예요.</p></div>
+</section>
+
+<section id="appendix">
+  <div class="sec-head"><span class="time">부록 · 선택</span><h2>ChatGPT로 노션 캘린더 만들기: 일정과 기말고사 학습 관리</h2></div>
+  <p class="goal"><strong>언제 하나요?</strong> 진도가 빨리 끝난 학생이나 수업이 끝난 뒤에 하는 선택 활동이에요. Claude 사용량(토큰)을 아끼려고 이번엔 <b>ChatGPT</b>로 해요. 결과물은 포트폴리오 <b>밖</b>의 비공개 페이지라서 게시한 포트폴리오에는 보이지 않아요.</p>
+
+  <h3>1단계. ChatGPT와 노션 연결하기</h3>
+  <ol class="steps" data-lab="appx1">
+    <li><span class="n">1</span><div><p>chatgpt.com 왼쪽 메뉴의 <span class="ui">플러그인</span>(앱)에서 <b>notion</b>을 검색해요.</p><img src="data:image/webp;base64,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" alt="ChatGPT 플러그인 화면에서 notion 검색" style="display:block;width:560px;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin-top:10px"></div></li>
+    <li><span class="n">2</span><div><p>Notion 카드의 <span class="ui">+</span>를 누르고 <span class="ui">ChatGPT로 계속</span>을 눌러요.</p><img src="data:image/webp;base64,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" alt="Notion 연결 창의 ChatGPT로 계속 버튼" style="display:block;width:280px;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin-top:10px"></div></li>
+    <li><span class="n">3</span><div><p>노션 창에서 <b>포트폴리오를 만든 워크스페이스</b>를 고르고 <span class="ui">계속하기</span>를 눌러요. Claude 연결할 때와 순서가 같아요. 워크스페이스 이름은 사람마다 달라요.</p><img src="data:image/webp;base64,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" alt="노션 워크스페이스 선택 화면 예시" style="display:block;width:300px;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin-top:10px"></div></li>
+  </ol>
+
+  <h3>2단계. ChatGPT에게 "나의 학업 관리" 만들게 하기</h3>
+  <ol class="steps" data-lab="appx2">
+    <li><span class="n">1</span><div><p>새 대화에서 아래 프롬프트를 보내요. [이름]은 내 포트폴리오 이름으로 바꾸거나 <span class="ui">예시 넣기</span>를 눌러 보세요.</p>
+      <div class="prompt"><div class="prompt-head"><span>부록 프롬프트 A · 학업 관리 캘린더 만들기</span><button class="copy" type="button">복사</button></div><pre>내 노션에 "📚 나의 학업 관리" 페이지를 새로 만들어 줘. "[이름] 포트폴리오" 페이지 안이 아니라 밖에, 비공개 페이지로 만들어.
+1) 페이지 안에 바로 보이는 인라인 데이터베이스 "학사일정 &amp; 학습계획" 1개를 만들어. 속성:
+- 일정명(제목)
+- 구분(선택: 학사일정, 시험·과제, 학습계획, 개인)
+- 날짜(날짜, 종료일 포함)
+- 과목(텍스트)
+- 메모(텍스트)
+- 완료(체크박스)
+2) 이 데이터베이스에 보기 탭 2개를 만들어.
+- "📅 캘린더": 캘린더, 날짜 기준, 카드에 구분·메모 표시
+- "📝 학습 메모": 표, 구분이 "학습계획"인 것만, 날짜 오름차순, 날짜·과목·메모·완료만 표시
+3) 설명 문장, 제목(헤딩) 블록, 링크된 보기, 하위 페이지는 만들지 마. 페이지 안에는 데이터베이스 1개만 있으면 돼.
+4) 포트폴리오 페이지는 건드리지 마.</pre><pre class="ex" hidden>내 노션에 "📚 나의 학업 관리" 페이지를 새로 만들어 줘. "클로버 포트폴리오" 페이지 안이 아니라 밖에, 비공개 페이지로 만들어.
+1) 페이지 안에 바로 보이는 인라인 데이터베이스 "학사일정 &amp; 학습계획" 1개를 만들어. 속성:
+- 일정명(제목)
+- 구분(선택: 학사일정, 시험·과제, 학습계획, 개인)
+- 날짜(날짜, 종료일 포함)
+- 과목(텍스트)
+- 메모(텍스트)
+- 완료(체크박스)
+2) 이 데이터베이스에 보기 탭 2개를 만들어.
+- "📅 캘린더": 캘린더, 날짜 기준, 카드에 구분·메모 표시
+- "📝 학습 메모": 표, 구분이 "학습계획"인 것만, 날짜 오름차순, 날짜·과목·메모·완료만 표시
+3) 설명 문장, 제목(헤딩) 블록, 링크된 보기, 하위 페이지는 만들지 마. 페이지 안에는 데이터베이스 1개만 있으면 돼.
+4) 포트폴리오 페이지는 건드리지 마.</pre></div></div></li>
+    <li><span class="n">2</span><div><p><b>부산대 학사일정 넣기.</b> <a href="https://www.pusan.ac.kr/kor/CMS/Haksailjung/view.do?mCode=MN076" target="_blank" rel="noopener">부산대 학사일정 페이지 ↗</a>에서 일정 표를 드래그해 복사한 뒤, 아래 프롬프트의 [ ] 자리에 붙여 넣어 보내요. 원문에 대학원 일정까지 섞여 있어도 괜찮아요. 프롬프트가 <b>학부 일정만</b> 골라서, <b>붙여 넣은 내용 안에서만</b> 등록하게 해요.</p>
+      <div class="prompt"><div class="prompt-head"><span>부록 프롬프트 B · 학사일정 등록</span><button class="copy" type="button">복사</button></div><pre>아래에 붙여 넣은 부산대학교 학사일정 중에서 학부생 일정만 노션 "학사일정 &amp; 학습계획" 데이터베이스에 구분 "학사일정"으로 등록해 줘.
+- "대학원"이 들어간 항목처럼 대학원생에게만 해당하는 일정은 빼 줘.
+- 수강신청, 개강·종강, 시험, 성적, 휴학·복학, 등록금처럼 학부생이 챙길 일정을 넣어 줘.
+- [오늘 이후] 일정만 넣어 줘.
+- 붙여 넣은 내용에 없는 일정이나 날짜는 절대 만들지 마.
+- 학부 일정인지, 날짜가 언제인지 애매한 항목은 등록하지 말고 목록으로 알려 줘.
+- 기간이 있는 일정은 종료일까지 넣어 줘.
+
+[여기에 학사일정 원문 붙여 넣기]</pre></div>
+      <p>예를 들어 붙여 넣은 원문이 아래와 같다면 이렇게 골라서 넣어요. <b>날짜는 설명용 가상 예시</b>예요. 실제 날짜는 학사일정 페이지 원문을 쓰세요.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>붙여 넣은 원문 (예시)</th><th>결과</th></tr></thead>
+        <tbody>
+          <tr><td>12.15 ~ 12.21 2학기 기말고사</td><td>등록 · 학사일정 (기간 그대로)</td></tr>
+          <tr><td>12.17 대학원 학위청구논문 제출 마감</td><td>제외 · 대학원 일정</td></tr>
+          <tr><td>12.22 동계방학 시작</td><td>등록 · 학사일정</td></tr>
+          <tr><td>11.10 2학기 중간 강의평가</td><td>제외 · 오늘 이전 일정</td></tr>
+          <tr><td>1학기 수강신청 (일정 추후 공지)</td><td>등록 안 함 · "날짜 애매" 목록으로 알려 줌</td></tr>
+        </tbody>
+      </table></div></div></li>
+    <li><span class="n">3</span><div><p><b>기말고사 학습 계획 만들기.</b> 내 시험 일정을 적어 보내면, 시험일에서 거꾸로 계산한 과목별 공부 계획이 캘린더에 들어가요. 캘린더 카드에는 그날 할 일 <b>메모</b>가 함께 보이고, "📝 학습 메모" 탭에서 날짜순으로 모아 볼 수 있어요.</p>
+      <div class="prompt"><div class="prompt-head"><span>부록 프롬프트 C · 기말고사 학습 계획</span><button class="copy" type="button">복사</button></div><pre>내 기말고사 일정이야.
+- [과목명] / 시험일 [날짜] / 범위 [범위] / 자신 없는 부분 [내용]
+- [과목명] / 시험일 [날짜] / 범위 [범위] / 자신 없는 부분 [내용]
+
+1) 각 시험을 노션 "학사일정 &amp; 학습계획" 데이터베이스에 구분 "시험·과제", 과목 이름을 넣어 등록해 줘.
+2) 오늘부터 시험일까지 거꾸로 계산해서 과목별 학습 계획을 구분 "학습계획"으로 넣어 줘. 하루 공부는 [2시간] 이내로, 시험 전날은 전체 복습으로.
+3) 자신 없는 부분은 더 일찍 시작하고, 시험 전에 한 번 더 복습하게 넣어 줘.
+4) 학습계획마다 "메모" 속성에 그날 할 일을 한 줄로 적어 줘. "메모" 속성이 없으면 텍스트 속성으로 추가해.
+5) 새 페이지나 링크된 보기는 만들지 마. 이 데이터베이스에 "📝 학습 메모" 탭이 없을 때만 탭으로 추가해 줘(표, 구분이 "학습계획"인 것만, 날짜 오름차순).
+6) 내가 적지 않은 시험이나 날짜는 만들지 마.</pre><pre class="ex" hidden>내 기말고사 일정이야.
+- 경영통계 / 시험일 12월 15일 / 범위 7~12장 / 자신 없는 부분 회귀분석
+- 마케팅원론 / 시험일 12월 17일 / 범위 8~14장 / 자신 없는 부분 STP 사례
+- 교양영어 / 시험일 12월 18일 / 범위 Unit 6~10 / 자신 없는 부분 듣기
+
+1) 각 시험을 노션 "학사일정 &amp; 학습계획" 데이터베이스에 구분 "시험·과제", 과목 이름을 넣어 등록해 줘.
+2) 오늘부터 시험일까지 거꾸로 계산해서 과목별 학습 계획을 구분 "학습계획"으로 넣어 줘. 하루 공부는 2시간 이내로, 시험 전날은 전체 복습으로.
+3) 자신 없는 부분은 더 일찍 시작하고, 시험 전에 한 번 더 복습하게 넣어 줘.
+4) 학습계획마다 "메모" 속성에 그날 할 일을 한 줄로 적어 줘. "메모" 속성이 없으면 텍스트 속성으로 추가해.
+5) 새 페이지나 링크된 보기는 만들지 마. 이 데이터베이스에 "📝 학습 메모" 탭이 없을 때만 탭으로 추가해 줘(표, 구분이 "학습계획"인 것만, 날짜 오름차순).
+6) 내가 적지 않은 시험이나 날짜는 만들지 마.</pre></div>
+      <p><span class="ui">예시 넣기</span>를 누르면 칸이 채워진 예시가 들어가요. 예시를 보내면 "📝 학습 메모" 탭에 이렇게 들어가요(일부).</p>
+      <div class="tbl"><table>
+        <thead><tr><th>날짜</th><th>과목</th><th>메모</th></tr></thead>
+        <tbody>
+          <tr><td>11.27(금)</td><td>경영통계</td><td>11장 회귀분석 개념 정리, 예제 3개</td></tr>
+          <tr><td>11.30(월)</td><td>마케팅원론</td><td>9장 STP 사례 2개 요약</td></tr>
+          <tr><td>12.4(금)</td><td>경영통계</td><td>회귀분석 기출 문제 10개 풀기</td></tr>
+          <tr><td>12.14(월)</td><td>경영통계</td><td>7~12장 전체 복습, 틀린 문제 다시 보기</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note tip"><b>왜 연동될까요?</b><p>"📅 캘린더"와 "📝 학습 메모"는 <b>같은 데이터베이스의 탭 두 개</b>예요. 캘린더에서 날짜를 옮기거나 메모를 고치면 학습 메모 탭에도 바로 바뀌고, 반대로 고쳐도 캘린더에 반영돼요. 시험 일정은 캘린더에만 보여요.</p></div></div></li>
+  </ol>
+  <div class="note ok"><b>시키기 → 직접 확인</b><p>노션에서 "📚 나의 학업 관리"를 열어 날짜가 원문과 맞는지 꼭 확인하세요. 공부를 마친 계획은 <b>완료</b>에 체크해요.</p></div>
+
+  <h3>3단계. 노션에서 직접 다듬기</h3>
+  <ol class="steps" data-lab="appx3">
+    <li><span class="n">1</span><div><p><b>날짜·시간 바꾸기:</b> 캘린더에서 일정을 열고 날짜를 클릭해요. <span class="ui">종료일</span>을 켜면 기간으로, <span class="ui">시간 포함</span>을 켜면 시간까지 넣을 수 있어요.</p><p class="exline">예: "경영통계 회귀분석 문제 풀이"를 12.4에서 12.5로 끌어 옮기면, "📝 학습 메모" 탭의 날짜도 같이 바뀌어요.</p></div></li>
+    <li><span class="n">2</span><div><p><b>구분·메모가 캘린더에 안 보이면:</b> 캘린더 오른쪽 위 <span class="ui">•••</span> → <span class="ui">속성</span>에서 "구분"과 "메모" 옆 눈 아이콘을 켜요.</p><p class="exline">예: 캘린더 칸에 "경영통계 회귀분석 문제 풀이" 아래 <b>학습계획 · 기출 문제 10개 풀기</b>, "동계방학 시작" 아래 <b>학사일정</b>이 함께 보여요.</p></div></li>
+    <li><span class="n">3</span><div><p><b>표·타임라인 보기 추가:</b> 보기 탭 옆 <span class="ui">+</span>를 눌러 <span class="ui">표</span>와 <span class="ui">타임라인</span>을 추가해요. 데이터는 그대로이고 보는 모양만 바뀌어요.</p><p class="exline">예: 타임라인에서는 "2학기 기말고사 12.15~12.21"처럼 기간이 있는 일정이 긴 막대로 보여서 시험 주간이 한눈에 들어와요.</p></div></li>
+    <li><span class="n">4</span><div><p><b>같은 이름이 두 번 보이면:</b> AI가 데이터베이스를 따로 만들고(▦ 한 줄 링크) 그 아래에 링크된 보기(↗ 붙은 캘린더)를 얹은 경우예요. ▦ 줄 왼쪽 <span class="ui">⋮⋮</span> → <span class="ui">인라인으로 전환</span>을 눌러 캘린더가 페이지 안에 바로 보이게 한 뒤, ↗ 블록은 <span class="ui">⋮⋮</span> → <span class="ui">삭제</span>해요. ↗는 보기일 뿐이라 지워도 일정은 그대로예요. <b>▦ 줄(원본)은 지우지 마세요.</b> 지우면 일정이 모두 사라져요(휴지통에서 복원은 돼요).</p><p class="exline">예: 정리하면 페이지 제목 아래에 "학사일정 &amp; 학습계획" 하나만 있고, 그 안에 📅 캘린더 · 📝 학습 메모 탭이 보여요. 탭이 없으면 보기 탭 옆 <span class="ui">+</span> → <span class="ui">표</span>로 "📝 학습 메모"를 만들고, 필터 구분 = 학습계획, 정렬 날짜 오름차순을 골라요.</p></div></li>
+  </ol>
+
+  <div class="note warn"><b>주의</b><p>ChatGPT는 노션에 쓸 때마다 승인 버튼이 떠요. 내용을 읽고 눌러 주세요. 연결이 막히면 노션 빈 페이지에서 <span class="ui">/캘린더</span> → <span class="ui">캘린더 보기</span>를 골라 직접 만들고, <span class="ui">새로 만들기</span>나 날짜 칸의 <span class="ui">+</span>로 일정을 넣으면 돼요.</p></div>
+</section>
+
+<footer>
+  <p>AI를 쓸 때: 주민번호·학번 같은 개인정보나 비공개 자료는 AI에 넣지 말고, AI가 쓴 문장은 사실인지 꼭 확인한 뒤 공개하세요. "지워 줘" 같은 요청은 무엇이 지워지는지 확인한 뒤 허용하세요. 실수로 지워져도 당황하지 마세요 — 노션 사이드바 아래 휴지통에서 복원(↺)할 수 있어요.</p>
+  <p>AI·노션 메뉴 이름은 업데이트에 따라 조금 다를 수 있어요. 막히면 손을 들어 주세요.</p>
+  <p class="rights">© 2026 hyejungyun. All rights reserved. <span style="opacity:.75">부산대 특강용 v13 · 최종 수정 2026.11.26</span></p>
+</footer>
+</div>
+<script>
+(function(){
+  function store(k,v){try{k='pnu:'+k;if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  // checklist
+  document.querySelectorAll('ul.check input').forEach(function(cb){
+    if(store('chk:'+cb.id)==='1')cb.checked=true;
+    cb.addEventListener('change',function(){store('chk:'+cb.id,cb.checked?'1':'0')});
+  });
+  // step done toggles
+  document.querySelectorAll('ol.steps').forEach(function(ol){
+    var lab=ol.dataset.lab;
+    ol.querySelectorAll(':scope>li').forEach(function(li,i){
+      var key='step:'+lab+':'+i, body=li.querySelector(':scope>div');
+      var b=document.createElement('button');b.type='button';b.className='done-btn';
+      function set(on){li.classList.toggle('done',on);b.textContent=on?'완료됨 · 취소':'완료 표시';b.setAttribute('aria-pressed',on)}
+      set(store(key)==='1');
+      b.addEventListener('click',function(){var on=!li.classList.contains('done');set(on);store(key,on?'1':'0')});
+      body.appendChild(b);
+    });
+  });
+  // copy buttons + editable prompts (edits persist per browser; reset restores original)
+  document.querySelectorAll('.prompt').forEach(function(box,i){
+    var btn=box.querySelector('.copy'),pre=box.querySelector('pre');
+    var orig=pre.textContent,key='pr:'+i;
+    try{pre.contentEditable='plaintext-only'}catch(e){pre.contentEditable='true'}
+    pre.setAttribute('spellcheck','false');
+    var saved=store(key);
+    if(saved)pre.textContent=saved;
+    pre.addEventListener('input',function(){store(key,pre.textContent)});
+    var rst=document.createElement('button');rst.type='button';rst.className='copy reset';rst.textContent='원래대로';
+    rst.addEventListener('click',function(){pre.textContent=orig;store(key,'')});
+    btn.parentNode.insertBefore(rst,btn);
+    var exs=box.querySelectorAll('pre.ex');
+    if(exs.length){var exi=0;
+      var exb=document.createElement('button');exb.type='button';exb.className='copy reset';exb.textContent='예시 넣기';
+      exb.addEventListener('click',function(){
+        pre.textContent=exs[exi].textContent;store(key,pre.textContent);
+        if(exs.length>1)exb.textContent='다른 예시 ('+(exi+1)+'/'+exs.length+')';
+        exi=(exi+1)%exs.length;
+      });
+      btn.parentNode.insertBefore(exb,rst);}
+    btn.addEventListener('click',function(){
+      var done=function(){btn.textContent='복사됨';setTimeout(function(){btn.textContent='복사'},1500)};
+      var fallback=function(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='선택됨 · Ctrl+C'};
+      try{navigator.clipboard.writeText(pre.textContent).then(done,fallback)}catch(e){fallback()}
+    });
+  });
+})();
+</script>
