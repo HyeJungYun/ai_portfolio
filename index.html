@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI 활용 커리어 아카이빙 · 부산대 특강</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,6 +98,28 @@ ol.steps li.done{opacity:.55}
 ol.steps li.done>.n{background:var(--accent);color:var(--surface)}
 .done-btn{justify-self:start;font:inherit;font-size:.8rem;color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer}
 .done-btn:hover{color:var(--ink)}
+.reset{justify-self:start;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:14px;font-size:.85rem;color:var(--muted)}
+.reset button{font:inherit;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.reset button:hover{color:var(--ink);border-color:var(--muted)}
+.reset .reset-yes{color:#fff;background:#c0392b;border-color:#c0392b}
+.reset .reset-yes:hover{color:#fff;filter:brightness(1.1)}
+.reset small{font-size:.8rem}
+.hl-tip{justify-self:start;margin:8px 0 0;font-size:.85rem;color:var(--muted)}
+mark.hl{color:inherit;border-radius:2px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-y{background:rgba(255,214,0,.45)}mark.hl-g{background:rgba(52,199,89,.35)}mark.hl-p{background:rgba(255,105,180,.35)}
+mark.hl-u{background:none;text-decoration:underline;text-decoration-color:#e0457b;text-decoration-thickness:2px;text-underline-offset:3px}
+mark.note-end::after{content:"📝";font-size:.72em;vertical-align:super;margin-left:2px}
+.hl-bar,.hl-pop{position:fixed;z-index:60;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px -10px rgba(0,0,0,.4)}
+.hl-bar{display:flex;gap:6px;align-items:center;padding:6px 8px}
+.hl-bar[hidden],.hl-pop[hidden]{display:none}
+.hl-bar button,.hl-pop button{font:inherit;font-size:.85rem;height:36px;min-width:36px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;touch-action:manipulation}
+.hl-bar .sw{width:36px;padding:0}.hl-bar .sw-y{background:#ffd600}.hl-bar .sw-g{background:#5ad27a}.hl-bar .sw-p{background:#ff8cc6}
+.hl-bar .u{text-decoration:underline;text-decoration-color:#e0457b;text-decoration-thickness:2px;text-underline-offset:3px}
+.hl-bar .del{display:none;color:#c0392b}.hl-bar.edit .del{display:inline-block}
+.hl-pop{width:min(320px,calc(100vw - 16px));padding:10px;box-sizing:border-box}
+.hl-pop textarea{display:block;width:100%;box-sizing:border-box;min-height:84px;resize:vertical;font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
+.hl-pop div{display:flex;justify-content:flex-end;gap:6px;margin-top:8px}
+.hl-pop .ok{background:var(--accent);border-color:var(--accent);color:#fff}
 kbd,.ui{font-family:var(--f-body);font-size:.88em;background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:4px;border:1px solid var(--line);white-space:nowrap}
 
 .prompt{background:var(--code-bg);color:var(--code-fg);border-radius:10px;overflow:hidden}
@@ -161,6 +185,8 @@ section{scroll-margin-top:16px}
     <p class="lead">흩어져 있던 과제·프로젝트·활동 기록을 AI와 함께 노션 포트폴리오 한 곳에 모아, 진로·취업에 바로 쓰는 나만의 커리어 맵으로 만듭니다. 오늘은 노션에서 블록을 하나하나 만들지 않아요. AI에 내 노션을 연결하고 말로 시키면, AI가 대시보드와 프로젝트 저장소를 직접 만듭니다. 나는 노션에서 결과를 확인하고 고치기만 해요.</p>
     <div class="meta"><span>⏱ 2시간</span><span>🤖 Claude + 노션</span><span>💸 무료 계정으로</span><span>🗺️ 나만의 커리어 맵</span></div>
     <nav class="links" aria-label="바로가기"><a class="cta b1" href="https://www.notion.so" target="_blank" rel="noopener">Notion ↗</a><a class="cta b2" href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a><a class="cta b3" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a><a class="cta b4" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a><a class="cta b5" href="https://sanjinee.pusan.ac.kr/mcp/guest" target="_blank" rel="noopener">산지니 ↗</a></nav>
+    <div class="reset" id="reset"><button type="button" class="reset-btn">↺ 기록 초기화 · 완료 <span class="done-n">0</span>/<span class="done-t">0</span></button><span class="reset-ask" hidden>완료 표시, 고친 프롬프트, 형광펜·메모를 모두 지울까요? <button type="button" class="reset-yes">지우기</button> <button type="button" class="reset-no">취소</button></span><small>이 브라우저에 저장된 표시만 지워요. 노션에 만든 페이지는 그대로예요.</small></div>
+    <p class="hl-tip">✍️ 읽다가 글을 드래그하거나(태블릿·폰은 길게 눌러) 고르면 형광펜·밑줄·메모를 남길 수 있어요.</p>
   </div>
 </header>
 
@@ -634,7 +660,7 @@ section{scroll-margin-top:16px}
 <footer>
   <p>AI를 쓸 때: 주민번호·학번 같은 개인정보나 비공개 자료는 AI에 넣지 말고, AI가 쓴 문장은 사실인지 꼭 확인한 뒤 공개하세요. "지워 줘" 같은 요청은 무엇이 지워지는지 확인한 뒤 허용하세요. 실수로 지워져도 당황하지 마세요 — 노션 사이드바 아래 휴지통에서 복원(↺)할 수 있어요.</p>
   <p>AI·노션 메뉴 이름은 업데이트에 따라 조금 다를 수 있어요. 막히면 손을 들어 주세요.</p>
-  <p class="rights">© 2026 hyejungyun. All rights reserved. <span style="opacity:.75">부산대 특강용 v13 · 최종 수정 2026.11.26</span></p>
+  <p class="rights">© 2026 hyejungyun. All rights reserved. <span style="opacity:.75">부산대 특강용 v16 · 최종 수정 2026.11.27</span></p>
 </footer>
 </div>
 <script>
@@ -657,6 +683,21 @@ section{scroll-margin-top:16px}
       body.appendChild(b);
     });
   });
+  // reset all saved progress (완료 표시, 체크, 고친 프롬프트)
+  (function(){
+    var box=document.getElementById('reset');if(!box)return;
+    var btn=box.querySelector('.reset-btn'),ask=box.querySelector('.reset-ask');
+    function count(){var all=document.querySelectorAll('ol.steps>li');
+      box.querySelector('.done-n').textContent=document.querySelectorAll('ol.steps>li.done').length;
+      box.querySelector('.done-t').textContent=all.length;}
+    count();document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('done-btn'))count()});
+    btn.addEventListener('click',function(){btn.hidden=true;ask.hidden=false});
+    box.querySelector('.reset-no').addEventListener('click',function(){ask.hidden=true;btn.hidden=false});
+    box.querySelector('.reset-yes').addEventListener('click',function(){
+      try{for(var i=localStorage.length-1;i>=0;i--){var k=localStorage.key(i);if(k&&k.indexOf('pnu:')===0)localStorage.removeItem(k)}}catch(e){}
+      location.reload();
+    });
+  })();
   // copy buttons + editable prompts (edits persist per browser; reset restores original)
   document.querySelectorAll('.prompt').forEach(function(box,i){
     var btn=box.querySelector('.copy'),pre=box.querySelector('pre');
@@ -684,5 +725,140 @@ section{scroll-margin-top:16px}
       try{navigator.clipboard.writeText(pre.textContent).then(done,fallback)}catch(e){fallback()}
     });
   });
+  // highlighter / underline / memo on page text (saved in this browser, cleared by 기록 초기화)
+  (function(){
+    var SEL='p,li,td,th,h2,h3,h4,dt,dd,figcaption,blockquote';
+    var SKIP='pre,button,textarea,.prompt,nav.links,#reset,.hl-bar,.hl-pop';
+    var data;try{data=JSON.parse(store('hl')||'[]')}catch(e){data=[]}
+    function save(){store('hl',JSON.stringify(data))}
+    function find(id){for(var i=0;i<data.length;i++)if(data[i].id===id)return data[i];return null}
+    function blocks(){return Array.prototype.filter.call(document.querySelectorAll(SEL),function(b){return !b.closest(SKIP)})}
+    function texts(block){
+      var w=document.createTreeWalker(block,NodeFilter.SHOW_TEXT,null),a=[],n;
+      while((n=w.nextNode())){var p=n.parentNode;if(n.nodeValue.length&&!p.closest(SKIP)&&p.closest(SEL)===block)a.push(n)}
+      return a;
+    }
+    function segments(r){
+      var out=[];
+      blocks().forEach(function(b,bi){
+        if(!r.intersectsNode(b))return;
+        var acc=0,s=-1,e=-1;
+        texts(b).forEach(function(t){
+          var len=t.nodeValue.length;
+          if(r.intersectsNode(t)){
+            var a=t===r.startContainer?r.startOffset:0,z=t===r.endContainer?r.endOffset:len;
+            if(z>a){if(s<0)s=acc+a;e=acc+z}
+          }
+          acc+=len;
+        });
+        if(s>=0&&e>s)out.push({b:bi,s:s,e:e});
+      });
+      return out;
+    }
+    function cls(a){return 'hl hl-'+a.c+(a.n?' has-note':'')}
+    function restyle(a){
+      var ms=document.querySelectorAll('mark.hl[data-id="'+a.id+'"]');
+      Array.prototype.forEach.call(ms,function(m,i){m.className=cls(a)+(a.n&&i===ms.length-1?' note-end':'');m.title=a.n||''});
+    }
+    function apply(a){
+      var bl=blocks();
+      a.segs.forEach(function(sg){
+        var b=bl[sg.b];if(!b)return;
+        var acc=0;
+        texts(b).map(function(t){return [t,t.nodeValue.length]}).forEach(function(p){
+          var t=p[0],ts=acc,te=acc+p[1];acc=te;
+          var x=Math.max(sg.s,ts),y=Math.min(sg.e,te);if(x>=y)return;if(!t.nodeValue.slice(x-ts,y-ts).trim())return;
+          if(y<te)t.splitText(y-ts);
+          if(x>ts)t=t.splitText(x-ts);
+          var m=document.createElement('mark');m.className='hl';m.dataset.id=a.id;
+          t.parentNode.insertBefore(m,t);m.appendChild(t);
+        });
+      });
+      restyle(a);
+    }
+    function unwrap(id){
+      Array.prototype.forEach.call(document.querySelectorAll('mark.hl[data-id="'+id+'"]'),function(m){
+        var p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize();
+      });
+    }
+    data.forEach(function(a){try{apply(a)}catch(e){}});
+
+    var bar=document.createElement('div');bar.className='hl-bar';bar.hidden=true;
+    bar.innerHTML='<button type="button" class="sw sw-y" data-c="y" aria-label="노랑 형광펜"></button><button type="button" class="sw sw-g" data-c="g" aria-label="초록 형광펜"></button><button type="button" class="sw sw-p" data-c="p" aria-label="분홍 형광펜"></button><button type="button" class="u" data-c="u">밑줄</button><button type="button" data-act="note">📝 메모</button><button type="button" class="del" data-act="del">지우기</button>';
+    var pop=document.createElement('div');pop.className='hl-pop';pop.hidden=true;
+    pop.innerHTML='<textarea placeholder="이 부분에 대한 메모를 적어요."></textarea><div><button type="button" data-act="cancel">닫기</button><button type="button" class="ok" data-act="save">저장</button></div>';
+    document.body.appendChild(bar);document.body.appendChild(pop);
+    var ta=pop.querySelector('textarea'),pending=null,cur=null,timer;
+
+    function place(el,rect){
+      el.hidden=false;
+      var w=el.offsetWidth,h=el.offsetHeight;
+      var x=Math.min(Math.max(8,rect.left+rect.width/2-w/2),innerWidth-w-8);
+      var y=rect.bottom+12;if(y+h>innerHeight-8)y=Math.max(8,rect.top-h-12);y=Math.min(Math.max(8,y),innerHeight-h-8);
+      el.style.left=x+'px';el.style.top=y+'px';
+    }
+    function hide(){bar.hidden=true;pop.hidden=true;cur=null;pending=null}
+    function openPop(a){
+      cur=a.id;ta.value=a.n||'';
+      var r=bar.hidden?document.querySelector('mark.hl[data-id="'+a.id+'"]').getBoundingClientRect():bar.getBoundingClientRect();
+      place(pop,r);ta.focus();
+    }
+    function selRange(){
+      var s=getSelection();if(!s.rangeCount||s.isCollapsed)return null;
+      var r=s.getRangeAt(0),ca=r.commonAncestorContainer;if(ca.nodeType===3)ca=ca.parentNode;
+      if(ca.closest(SKIP)||!segments(r).length)return null;
+      return r;
+    }
+    document.addEventListener('selectionchange',function(){
+      clearTimeout(timer);
+      timer=setTimeout(function(){
+        if(!pop.hidden)return;
+        var r=selRange();
+        if(r){pending=r.cloneRange();cur=null;bar.classList.remove('edit');place(bar,r.getBoundingClientRect())}
+        else if(!cur){bar.hidden=true;pending=null}
+      },250);
+    });
+    document.addEventListener('click',function(e){
+      if(bar.contains(e.target)||pop.contains(e.target))return;
+      var m=e.target.closest&&e.target.closest('mark.hl');
+      if(m&&getSelection().isCollapsed){
+        var a=find(m.dataset.id);if(!a)return;
+        pending=null;cur=a.id;bar.classList.add('edit');place(bar,m.getBoundingClientRect());
+        if(a.n)openPop(a);else pop.hidden=true;
+        return;
+      }
+      if(getSelection().isCollapsed)hide();
+    });
+    function keep(e){e.preventDefault()}
+    bar.addEventListener('mousedown',keep);bar.addEventListener('pointerdown',keep);
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('button');if(!b)return;
+      var c=b.dataset.c,act=b.dataset.act,a;
+      if(cur){
+        a=find(cur);if(!a)return hide();
+        if(c){a.c=c;save();restyle(a)}
+        else if(act==='note')openPop(a);
+        else if(act==='del'){unwrap(a.id);data=data.filter(function(x){return x.id!==a.id});save();hide()}
+        return;
+      }
+      if(!pending)return;
+      var segs=segments(pending);if(!segs.length)return hide();
+      a={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),segs:segs,c:c||'y',n:''};
+      data.push(a);save();apply(a);
+      getSelection().removeAllRanges();pending=null;
+      if(act==='note'){cur=a.id;bar.classList.add('edit');openPop(a)}else hide();
+    });
+    pop.addEventListener('click',function(e){
+      var b=e.target.closest('button');if(!b)return;
+      if(b.dataset.act==='save'){var a=find(cur);if(a){a.n=ta.value.trim();save();restyle(a)}}
+      hide();
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')hide()});
+    addEventListener('scroll',function(){
+      if(!pop.hidden)return;
+      var r=pending&&selRange();
+      if(r)place(bar,r.getBoundingClientRect());else{bar.hidden=true;cur=null}
+    },{passive:true});
+  })();
 })();
 </script>
